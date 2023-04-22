@@ -1,66 +1,47 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
- * print_char - Prints a character
- * @args: va_list containing the character to print
+ * print_char - prints a character
+ * @args: the va_list containing the character to print
+ *
+ * Return: the number of characters printed
  */
-void print_char(va_list args)
+int print_char(va_list args)
 {
-char c = va_arg(args, int);
-
-putchar(c);
+return (_putchar(va_arg(args, int)));
 }
 
 /**
- * print_string - Prints a string
- * @args: va_list containing the string to print
+ * print_string - prints a string
+ * @args: the va_list containing the string to print
+ *
+ * Return: the number of characters printed
  */
-void print_string(va_list args)
+int print_string(va_list args)
 {
 char *str = va_arg(args, char *);
+int count = 0;
+
+if (str == NULL)
+str = "(null)";
 
 while (*str)
 {
-putchar(*str);
+count += _putchar(*str);
 str++;
 }
+
+return (count);
 }
 
 /**
- * print_percent - Prints a percent sign
- * @args: va_list (unused)
+ * print_percent - prints a percent sign
+ * @args: the va_list (unused)
+ *
+ * Return: the number of characters printed
  */
-void print_percent(va_list args)
+int print_percent(__attribute__((unused)) va_list args)
 {
-(void)args;
-putchar('%');
+return (_putchar('%'));
 }
-/**
- * print_int - Prints an integer
- * @args: va_list
- */
-void print_int(va_list args)
-{
-	int n = va_arg(args, int);
-	char buffer[12];
-	int i = 0;
 
-	if (n == 0)
-	{
-		putchar('0');
-		return;
-	}
-	if (n < 0)
-	{
-		putchar('-');
-		n = -n;
-	}
-	while (n > 0)
-	{
-		buffer[i++] = (n % 10) + '0';
-		n /= 10;
-	}
-	while (i > 0)
-		putchar(buffer[--i]);
-}

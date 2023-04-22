@@ -3,22 +3,22 @@
 
 #include <stdarg.h>
 #include <stddef.h>
-
 /**
- * struct specifier - Structure for conversion specifiers and their functions
- * @spec: Conversion specifier
- * @func: Function to handle the specifier
+ * struct format - struct for format types
+ * @type: the type of format
+ * @func: the function to print the format
  */
-typedef struct specifier
+typedef struct format
 {
-char spec;
-void (*func)(va_list);
-} specifier_t;
+char *type;
+int (*func)(va_list);
+} format_t;
 
 int _printf(const char *format, ...);
-void print_char(va_list args);
-void print_string(va_list args);
-void print_percent(va_list args);
-void print_int(va_list args);
+int _putchar(char c);
+int print_char(va_list args);
+int print_string(va_list args);
+int print_percent(va_list args);
 
-#endif
+#endif /* MAIN_H */
+
