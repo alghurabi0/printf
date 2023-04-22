@@ -1,20 +1,23 @@
-#ifndef CUSTOM_PRINTF_H
-#define CUSTOM_PRINTF_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <stddef.h>
 
-int print_char(va_list args, int count);
-int print_string(va_list args, int count);
-int print_decimal(va_list args, int count);
-int print_binary(va_list args, int count);
-int print_unsigned(va_list args, int count);
-int print_octal(va_list args, int count);
-int print_hex(va_list args, int count, int uppercase);
-int print_format_specifier(va_list args, int count, char specifier);
-int print_format_string(const char *format, va_list args);
+/**
+ * struct specifier - Structure for conversion specifiers and their functions
+ * @spec: Conversion specifier
+ * @func: Function to handle the specifier
+ */
+typedef struct specifier
+{
+char spec;
+void (*func)(va_list);
+} specifier_t;
+
 int _printf(const char *format, ...);
+void print_char(va_list args);
+void print_string(va_list args);
+void print_percent(va_list args);
 
-#endif /* CUSTOM_PRINTF_H */
-
+#endif
