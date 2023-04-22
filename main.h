@@ -3,6 +3,7 @@
 
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdio.h>
 /**
  * struct format - struct for format types
  * @type: the type of format
