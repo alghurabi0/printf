@@ -36,4 +36,31 @@ void print_percent(va_list args)
 (void)args;
 putchar('%');
 }
+/**
+ * print_int - Prints an integer
+ * @args: va_list
+ */
+void print_int(va_list args)
+{
+	int n = va_arg(args, int);
+	char buffer[12];
+	int i = 0;
 
+	if (n == 0)
+	{
+		putchar('0');
+		return;
+	}
+	if (n < 0)
+	{
+		putchar('-');
+		n = -n;
+	}
+	while (n > 0)
+	{
+		buffer[i++] = (n % 10) + '0';
+		n /= 10;
+	}
+	while (i > 0)
+		putchar(buffer[--i]);
+}
