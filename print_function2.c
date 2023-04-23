@@ -22,4 +22,17 @@ count += print_char(hex[n % 16]);
 
 return (count);
 }
+/**
+ * print_binary - prints a binary number
+ * @n: binary number to print
+ * Return: number of characters printed
+ */
+int print_binary(unsigned int n)
+{
+	int count = 0;
 
+	if (n / 2)
+		count += print_binary(n / 2);
+	count += print_char((n % 2) + '0');
+	return (count);
+}

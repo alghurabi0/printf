@@ -10,6 +10,6 @@ int print_integer(int n);
 int print_unsigned_integer(unsigned int n);
 int print_octal(unsigned int n);
 int print_hexadecimal(unsigned int n, int uppercase);
-
+int print_binary(unsigned int n);
 #endif /* MAIN_H */
 
