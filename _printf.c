@@ -47,6 +47,9 @@ break;
 case 'b':
 count += print_binary(va_arg(args, unsigned int));
 break;
+case 'S':
+count += print_string_non_printable(va_arg(args, char *));
+break;
 default:
 count += print_char('%');
 count += print_char(*format);

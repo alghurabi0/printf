@@ -36,3 +36,27 @@ int print_binary(unsigned int n)
 	count += print_char((n % 2) + '0');
 	return (count);
 }
+/**
+ * print_string_non_printable - prints a string, replacing
+ * non-printable characters with their ASCII code value in hexadecimal
+ * @str: string to print
+ * Return: number of characters printed
+ */
+int print_string_non_printable(char *str)
+{
+	int count = 0;
+
+	while (*str)
+	{
+		if (*str < 32 || *str >= 127)
+		{
+			count += print_char('\\');
+			count += print_char('x');
+			count += print_hexadecimal(*str, 1);
+		}
+		else
+			count += print_char(*str);
+		str++;
+	}
+	return (count);
+}
