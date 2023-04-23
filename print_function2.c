@@ -54,6 +54,13 @@ int print_string_non_printable(char *str)
 			count += print_char('x');
 			count += print_hexadecimal(*str, 1);
 		}
+		else if (*str == '\n')
+		{
+			count += print_char('\\');
+			count += print_char('x');
+			count += print_char('0');
+			count += print_char('A');
+		}
 		else
 			count += print_char(*str);
 		str++;
