@@ -39,12 +39,16 @@ break;
 case 'X':
 count += print_hexadecimal(va_arg(args, unsigned int), 1);
 break;
+case 'p':
+count += print_char('0');
+count += print_char('x');
+count += print_hexadecimal(va_arg(args, unsigned long), 1);
+break;
 default:
 count += print_char('%');
 count += print_char(*format);
 break;
 }
-
 return (count);
 }
 
