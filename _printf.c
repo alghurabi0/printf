@@ -2,34 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * _printf - produces output according to a format
- * @format: character string
+ * print_format - prints a format specifier
+ * @format: format specifier to print
+ * @args: arguments to print
  *
- * Return: number of characters printed (excluding the null byte used to end
- * output to strings)
+ * Return: number of characters printed
  */
-int _printf(const char *format, ...)
+int print_format(const char *format, va_list args)
 {
-va_list args;
-int i, count = 0;
-char *str;
+int count = 0;
 
-va_start(args, format);
-for (i = 0; format[i] != '\0'; i++)
-{
-if (format[i] == '%')
-{
-i++;
-switch (format[i])
+switch (*format)
 {
 case 'c':
 count += print_char(va_arg(args, int));
 break;
 case 's':
-str = va_arg(args, char *);
-if (str == NULL)
-str = "(null)";
-count += print_string(str);
+count += print_string(va_arg(args, char *));
 break;
 case '%':
 count += print_char('%');
@@ -52,14 +41,44 @@ count += print_hexadecimal(va_arg(args, unsigned int), 1);
 break;
 default:
 count += print_char('%');
-count += print_char(format[i]);
+count += print_char(*format);
 break;
 }
+
+return (count);
+}
+
+/**
+ * _printf - produces output according to a format
+ * @format: character string
+ *
+ * Return: number of characters printed (excluding the null byte used to end
+ * output to strings)
+ */
+int _printf(const char *format, ...)
+{
+va_list args;
+int count = 0;
+
+va_start(args, format);
+
+while (*format)
+{
+if (*format == '%')
+{
+format++;
+count += print_format(format, args);
+format++;
 }
 else
-count += print_char(format[i]);
+{
+count += print_char(*format);
+format++;
 }
+}
+
 va_end(args);
+
 return (count);
 }
 
